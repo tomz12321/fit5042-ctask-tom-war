@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>Banking Transaction System</title> 
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                    Banking Transaction  List
+                </div>
+            </div>
+
+
+            <h:form id="MyForm">
+                <table class="table table-bordered table-striped">
+                    <!-- For each banking Transaction in bankingTransactions ArrayList... --> 
+                    <ui:repeat id="Myrepeat" value="{transactionManagedBean.getAllBankTransactions}" var="bankingTransaction" varStatus="status"> 
+                        <tr onclick="document.getElementById('MyForm:principle').value = document.getElementById('MyForm:Myrepeat:#{status.index}:outBankingTransactionName2').textContent"> 
+           
+         
+                            <td>
+                                <h:outputText value="{bankingTransaction.transactionId}" id="transactionId" /> 
+                            </td>
+                            <td> 
+                                <h:outputLabel id="bankingTransactionName" value="BankingTransactionName"  />
+                            </td>
+                            <td> 
+                                <h:outputText id="outBankingTransactionName" value="#{bankingTransaction.bankingTransactionName}"  />
+                            </td>
+                            <td> 
+                                <h:outputLabel id="bankingTransactionNo" value="BankingTransactionNo"/></td>
+                            <td> 
+                                <h:outputText id="outBankingTransactionNo" value="#{bankingTransaction.bankingTransactionNo}"></h:outputText>
+                            </td>
+                            <td> 
+                                <h:commandButton id="view" value="view" action="#{bankingTransaction.searchbyId(transactionId)}" />
+                            </td>
+                        </tr> 
+
+                    </ui:repeat>
+                    
+                </table>
+            </h:form>
+            <table>
+                <tr>
+                    <td>
+                    <h:inputText value="" id="searchTitle" /> 
+                    </td>
+                    <td> 
+                        <h:commandButton id="searchTitleButton" value="search" action="#{bankingTransaction.searchBankTransactionByName(searchTitle)}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <h:inputText value="" id="searchTitle2" /> 
+                    </td>
+                    <td> 
+                        <h:commandButton id="searchTitleButton2" value="search" action="#{bankingTransaction.searchBankTransactionByNo(searchTitle2)}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <h:inputText value="" id="searchTitle3" /> 
+                    </td>
+                    <td> 
+                        <h:commandButton id="searchTitleButton3" value="search" action="#{bankingTransaction.searchBankTransactionByType(searchTitle3)}" />
+                    </td>
+                </tr>
+            </table>
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-brand">
+                        Search Result
+                    </div>
+                </div>
+            
+                <table class="table table-bordered table-striped">
+                
+                    <ui:repeat id="Myrepeat2" value="#{transactionManagedBean.getAllBankTransactions}" var="bankingTransaction" varStatus="status"> 
+                        <tr onclick="document.getElementById('MyForm2:principle').value = document.getElementById('MyForm2:Myrepeat:#{status.index}:outBankingTransactionName2').textContent">
+                            <td>
+                                <h:outputText value="#{bankingTransaction.transactionId}" id="transactionId2" /> 
+                            </td>
+                            <td> 
+                                <h:outputLabel id="bankingTransactionName2" value="BankingTransactionName"  />
+                            </td>
+                            <td> 
+                                <h:outputText id="outBankingTransactionName2" value="#{bankingTransaction.bankingTransactionName}"  />
+                            </td>
+                            <td> 
+                                <h:outputLabel id="bankingTransactionNo2" value="BankingTransactionNo"/></td>
+                            <td> 
+                                <h:outputText id="outBankingTransactionNo2" value="#{bankingTransaction.bankingTransactionNo}"></h:outputText>
+                            </td>
+                            <td> 
+                                <h:commandButton id="view2" value="view" action="#{bankingTransaction.searchbyId(transactionId)}" />
+                            </td>
+                        </tr> 
+
+                    </ui:repeat>
+                
+                </table>
+            
+            
+        </div>
+        
+    </h:body>
+</html>
+
